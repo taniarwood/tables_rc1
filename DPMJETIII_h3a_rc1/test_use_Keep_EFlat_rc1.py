@@ -35,11 +35,12 @@ test = flux.EvaluateSpline('nue',10, 0.3)
 print 'try an eval new code'
 test_flat =  flux_flat.EvaluateSplineEflat('nue',10, 0.3)
 print 'try an eval new code on zeith integrated'
-test_zenithinteg =  flux_flat.EvalZenithIntegrated_NuE('nue', 10.)
+test_zenithinteg =  flux_flat.evalSplineNue_ZenI( 10.)
+print test_zenithinteg, 'new dict of zenith inegrated splines'
 #test_mu = flux.EvaluateSplineMuflat('numu', 10, 0.3)
 test_e = flux.EvaluateSplineEflat('nue', 10, 0.3)
 #print test
-
+quit() 
 def redoFile(infile_name, outfile_name):
 
     data = pickle.load(open(infile_name))
