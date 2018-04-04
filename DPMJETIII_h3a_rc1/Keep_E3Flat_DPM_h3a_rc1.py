@@ -146,7 +146,13 @@ class MCEqFluxSpline(object):
 	return new_numu_flux_total
 	
     def correction_factor(self, energy, nu_pi_scale = 1.0):
+	'''
+        correction factor fuction added : cor_factor = new total flux /origial total flux"
+        '''
 	return (self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy)) ) /( self.zenith_integrated_dict['numu_k_zenI'](energy) +  (self.zenith_integrated_dict['numu_p_zenI'](energy)) )
+
+	
+
 
 #  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
 #           my fluxes! Since They come almost entirely from pions at these energies I will add them to the pion template
