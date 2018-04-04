@@ -188,7 +188,7 @@ class MCEqFluxSpline(object):
 	#directory = "/home/trwood/tables/DPMJETIII_GH/"
 	#directory = "/home/trwood/tables_ICRC/DPMJETIII_GH/"
 #	directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_ICRC_berlin/DPMJETIII_GH/'
-	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/'
+	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
         #directory = "/home/trwood/sybill_2.3_extended_tables_packag"
         #total fluxes from all sources for nu/anti nu ratio etc,
 

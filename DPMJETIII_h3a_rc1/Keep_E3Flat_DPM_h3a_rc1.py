@@ -74,59 +74,8 @@ class MCEqFluxSpline(object):
 ######################################################################
     #Make the ID splines (one for numu, one for nue) and flat fluxes
 #####################################################################
-
-
-#  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
-#           my fluxes! Since They come almost entirely from pions at these energies I will add them to the pion template
-#           I will do (numu_total - kaons)  = rest ie "pions" hence forth (is primarily pions or from pion decay)
-#
-    ########## NU MU #################################
-    def make_fmu(self,energy_use):
-    
-       # data = pckl.load(open('/Users/trwood/oscFit3D_v2.0_Tania/resources/ipython_notebooks/tw_neutrino_flux_wsumsDPM_GH.pckl'))
-       # faster to save the file above before hand and upload it now. That can be error prone however, so do this the long way 
-       # for the purpose of re-weighting the sample. 
-
-	##IDEALLY ONLY DO THIS ONCE
-
-        eedges = np.logspace(-0.5, 3., 301)
-        ecenters = (eedges[1:] + eedges[:-1])/2.
-        ecenters_new = (eedges[1:] + eedges[:-1])/2.        
-
-	esteps = eedges[1:]-eedges[:-1]
-
-        zedges = np.linspace(-1,1, 101)
-        zcenters = (zedges[1:] + zedges[:-1])/2.
-
-	sum_numu_all = np.zeros_like(ecenters)
-	sum_numubar_all = np.zeros_like(ecenters)
-#    	sum_numu_from_p = np.zeros_like(ecenters)
-#   	sum_numu_from_k = np.zeros_like(ecenters)
-#   	sum_numubar_from_p = np.zeros_like(ecenters)
-#    	sum_numubar_from_k = np.zeros_like(ecenters)
-
-    	for eii, energyi  in enumerate(ecenters):
-        	for zii , czenith  in enumerate(zcenters):
-            	#	sum_numu_from_p[eii] +=(self.spline_dict['numu_from_pion'].ev(energyi, czenith)/energyi**3)
-            #		sum_numu_from_k[eii] +=(self.spline_dict['numu_from_k'].ev(energyi, czenith)/energyi**3)
-           # 		sum_numubar_from_p[eii] +=(self.spline_dict['antinum_from_pion'].ev(energyi, czenith)/energyi**3)
-           # 		sum_numubar_from_k[eii] +=(self.spline_dict['antinum_from_k'].ev(energyi, czenith)/energyi**3)
-			sum_numu_all[eii] +=(self.spline_dict['numu'].ev(energyi, czenith)/energyi**3)
-			sum_numubar_all[eii] +=(self.spline_dict['antinumu'].ev(energyi, czenith)/energyi**3)
-
-
-	#SWITCH TO USING TOTAL NUMU FLUX
-        #numu_tot_use_y =  (sum_numu_from_p + sum_numubar_from_p + sum_numu_from_k + sum_numubar_from_k)  * ecenters**3
-	numu_tot_use_y =  (sum_numu_all + sum_numubar_all)  * ecenters**3        
-
-        fmu = interp1d(ecenters, numu_tot_use_y, kind='cubic' )
-        #pckl.dump(fmu,open('flux_flat_DPMJETIII_GH_numu.pckl', 'w'))
-        return fmu(energy_use)
-    
-    ######### NU E #################################
-    def make_fe(self,energy_use):
-#        data = pckl.load(open('/Users/trwood/oscFit3D_v2.0_Tania/resources/ipython_notebooks/tw_neutrino_flux_wsumsDPM_GH.pckl'))
-        eedges = np.logspace(-0.5, 3., 301)
+    def zenith_integrated(self):
+	eedges = np.logspace(-0.5, 3., 301)
         ecenters = (eedges[1:] + eedges[:-1])/2.
         ecenters_new = (eedges[1:] + eedges[:-1])/2.
 
@@ -135,25 +84,72 @@ class MCEqFluxSpline(object):
         zedges = np.linspace(-1,1, 101)
         zcenters = (zedges[1:] + zedges[:-1])/2.
 
+        sum_numu_all = np.zeros_like(ecenters)
+        sum_numubar_all = np.zeros_like(ecenters)
+        sum_numu_from_k = np.zeros_like(ecenters)
+        sum_numubar_from_k = np.zeros_like(ecenters)
+
         sum_nue  = np.zeros_like(ecenters)
         sum_nuebar  = np.zeros_like(ecenters)
 
+    #    bin_width = 2.0/len(zcenters)
+	#should use this bin_width but did not in orginal flat fluxes, so for today dont' use them either
+	bin_width = 1.0
+
         for eii, energyi  in enumerate(ecenters):
                 for zii , czenith  in enumerate(zcenters):
-                        sum_nue[eii]  +=(self.spline_dict['nue'].ev(energyi, czenith)/energyi**3)
-                        sum_nuebar[eii] +=(self.spline_dict['antinue'].ev(energyi, czenith)/energyi**3)
+                	sum_numu_from_k[eii] +=(self.spline_dict['numu_from_k'].ev(energyi, czenith)/energyi**3)*bin_width 
+                 	sum_numubar_from_k[eii] +=(self.spline_dict['antinum_from_k'].ev(energyi, czenith)/energyi**3)*bin_width 
+                 	
+			sum_numu_all[eii] +=(self.spline_dict['numu'].ev(energyi, czenith)/energyi**3)*bin_width 
+                        sum_numubar_all[eii] +=(self.spline_dict['antinumu'].ev(energyi, czenith)/energyi**3)*bin_width 
+                        
+			sum_nue[eii]  +=(self.spline_dict['nue'].ev(energyi, czenith)/energyi**3)*bin_width 
+                        sum_nuebar[eii] +=(self.spline_dict['antinue'].ev(energyi, czenith)/energyi**3)*bin_width 
+
+	#all the numu iterations
+	numu_p_tot_use_y =  ((sum_numu_all + sum_numubar_all) - (sum_numu_from_k + sum_numubar_from_k))  * ecenters**3
+	numu_k_tot_use_y = (sum_numubar_from_k + sum_numu_from_k) * ecenters**3
+        numu_tot_use_y =  (sum_numu_all + sum_numubar_all)  * ecenters**3
+	# for the single nue one
+	nue_tot_use_y = (sum_nue + sum_nuebar)  * ecenters**3
+
+
+	#make the zenith integrated splines to pass to the dictionary
+        nue_zenI = interp1d(ecenters, nue_tot_use_y, kind='cubic' )
+        numu_zenI = interp1d(ecenters, numu_tot_use_y, kind='cubic' )
+        numu_k_zenI = interp1d(ecenters, numu_k_tot_use_y, kind='cubic' )
+        numu_p_zenI = interp1d(ecenters, numu_p_tot_use_y, kind='cubic' )
+
+	####################################
+	# Dictionary of splines to return
+	######################################
+	zen_integrated_dictionary = { 'nue_zenI':nue_zenI, 
+				'numu_zenI':numu_zenI, 
+				'numu_k_zenI':numu_k_zenI,
+				'numu_p_zenI':numu_p_zenI}
+        #pckl.dump((nue_,open('splined_zenith_integ_DPMJETIII_h3a_nue.pckl', 'w'))
+        return  zen_integrated_dictionary
 
 
 
-       #note nue_tot_use_y is = nu_flux*E^3   (That is what the table is caluclated in)  
-	#the confusing issue is I had, as a rule, been returning Flux (not Flux*E^3) 
-        nue_tot_use_y =  (sum_nue + sum_nuebar  ) *  (ecenters**3) 
-        fe = interp1d(ecenters, nue_tot_use_y, kind='cubic' )
-        #pckl.dump(fe,open('flux_flat_DPMJETIII_GH_nue.pckl', 'w'))
-        return fe
 
-    def EvalZenithIntegrated_NuE(self,energy):
-	self.fe(energy)
+####FOR TESTING
+    def evalSplineNue_ZenI(self, energy = 10.0):
+ #       spline = self.zenith_integrated_dict['nue_zenI']
+#  can also do as a one line like this:
+	return  self.zenith_integrated_dict['nue_zenI'](energy) 
+#        return spline(energy)      	
+    
+#    def adjust_pi_k(self, energy = 10.0):
+#	self.zenith_integrated_dict['numu_k_zenI']
+	
+
+#  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
+#           my fluxes! Since They come almost entirely from pions at these energies I will add them to the pion template
+#           I will do (numu_total - kaons)  = rest ie "pions" hence forth (is primarily pions or from pion decay)
+#
+
     
     #######################################################################
     #  Function to Evaluate/make 'flat' (flat in E^3 space) fluxes  Splines
@@ -162,15 +158,18 @@ class MCEqFluxSpline(object):
     ########## NU E #################################
     def EvaluateSplineEflat(self, spline_name = None, energy = 0, zenith = -1):
         spline_scaling_factorE = 1.2
-        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorE/self.EvalZenithIntegrated_NuE(energy))
+
+	#zenith_integrated_dict = self.zenith_integrated()    #numu_zenI
+
+        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorE/(self.zenith_integrated_dict['nue_zenI'](energy))    )
 
     def EvaluateSplineE(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
     
     ######### NU MU #################################
-    def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
-        spline_scaling_factorMu = 5.7
-        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorMu/self.make_fmu(energy))
+#    def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
+#        spline_scaling_factorMu = 5.7
+#        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorMu/self.make_fmu(energy))
     
     def EvaluateSplineMu(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
@@ -204,5 +203,4 @@ class MCEqFluxSpline(object):
                            # 'numu_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion.txt"),
                            # 'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
 
-
-
+	self.zenith_integrated_dict = self.zenith_integrated()    #numu_zenI
