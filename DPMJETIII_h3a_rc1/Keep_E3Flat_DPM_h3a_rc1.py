@@ -138,13 +138,15 @@ class MCEqFluxSpline(object):
     def evalSplineNue_ZenI(self, energy = 10.0):
  #       spline = self.zenith_integrated_dict['nue_zenI']
 #  can also do as a one line like this:
-	return  self.zenith_integrated_dict['nue_zenI'](energy) 
+	return   self.zenith_integrated_dict['nue_zenI'](energy) 
 #        return spline(energy)      	
     
-    def adjust_pi_k(self, energy = 10.0, nu_pi_ratio=1.0):
-        new_numu_flux_total = self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_ratio * (self.zenith_integrated_dict['numu_p_zenI'](energy))
+    def adjust_pi_k(self, energy = 10.0, nu_pi_scale=1.0):
+        new_numu_flux_total = self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy))
 	return new_numu_flux_total
 	
+    def correction_factor(self, energy, nu_pi_scale = 1.0):
+	return (self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy)) ) /( self.zenith_integrated_dict['numu_k_zenI'](energy) +  (self.zenith_integrated_dict['numu_p_zenI'](energy)) )
 
 #  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
 #           my fluxes! Since They come almost entirely from pions at these energies I will add them to the pion template
@@ -158,19 +160,19 @@ class MCEqFluxSpline(object):
     
     ########## NU E #################################
     def EvaluateSplineEflat(self, spline_name = None, energy = 0, zenith = -1):
-        spline_scaling_factorE = 1.2
+      #  spline_scaling_factorE = 1.2
 
 	#zenith_integrated_dict = self.zenith_integrated()    #numu_zenI
 
-        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorE/(self.zenith_integrated_dict['nue_zenI'](energy))    )
+        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorE/(self.zenith_integrated_dict['nue_zenI'](energy))    )
 
     def EvaluateSplineE(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
     
     ######### NU MU #################################
     def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
-        spline_scaling_factorMu = 5.7
-        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
+     #   spline_scaling_factorMu = 5.7
+        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
     
     def EvaluateSplineMu(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
@@ -188,6 +190,10 @@ class MCEqFluxSpline(object):
         '''
 	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
         #total fluxes from all sources for nu/anti nu ratio etc,
+	
+	#global data members
+	self.spline_scaling_factorE = 1.2
+        self.spline_scaling_factorMu = 5.7
 
         self.spline_dict = {'nue' :self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "nue_totals.txt"),
                             'antinue':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinue_totals.txt"),
