@@ -4,6 +4,10 @@ import pickle
 from scipy.interpolate import RectBivariateSpline, SmoothBivariateSpline
 import matplotlib.pyplot as plt
 
+
+#Basic version that only splines the 2D tables and allows one to evalutate said splines (for a given particle type)
+
+
 class MCEqFluxSpline(object):
 
     def LoadData(self, energylist_file, coszenlist_file, fluxfile2D):
