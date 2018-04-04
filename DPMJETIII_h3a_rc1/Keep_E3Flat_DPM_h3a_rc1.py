@@ -141,8 +141,9 @@ class MCEqFluxSpline(object):
 	return  self.zenith_integrated_dict['nue_zenI'](energy) 
 #        return spline(energy)      	
     
-#    def adjust_pi_k(self, energy = 10.0):
-#	self.zenith_integrated_dict['numu_k_zenI']
+    def adjust_pi_k(self, energy = 10.0, nu_pi_ratio=1.0):
+        new_numu_flux_total = self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_ratio * (self.zenith_integrated_dict['numu_p_zenI'](energy))
+	return new_numu_flux_total
 	
 
 #  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
@@ -167,9 +168,9 @@ class MCEqFluxSpline(object):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
     
     ######### NU MU #################################
-#    def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
-#        spline_scaling_factorMu = 5.7
-#        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorMu/self.make_fmu(energy))
+    def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
+        spline_scaling_factorMu = 5.7
+        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
     
     def EvaluateSplineMu(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
@@ -185,13 +186,7 @@ class MCEqFluxSpline(object):
         '''
         for each flux, 1) load the data , 2) make the spline 3) eval the spline
         '''
-        #directory = "/Users/trwood/oscFit3D_v2.0_Tania/resources/ipython_notebooks/"
-        #directory = "/Users/trwood/oscFit3D_v2.0_Tania/resources/ipython_notebooks/sybill_2.3_extended_tables/"
-	#directory = "/home/trwood/tables/DPMJETIII_GH/"
-	#directory = "/home/trwood/tables_ICRC/DPMJETIII_GH/"
-#	directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_ICRC_berlin/DPMJETIII_GH/'
 	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
-        #directory = "/home/trwood/sybill_2.3_extended_tables_packag"
         #total fluxes from all sources for nu/anti nu ratio etc,
 
         self.spline_dict = {'nue' :self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "nue_totals.txt"),
@@ -203,4 +198,4 @@ class MCEqFluxSpline(object):
                            # 'numu_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion.txt"),
                            # 'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
 
-	self.zenith_integrated_dict = self.zenith_integrated()    #numu_zenI
+	self.zenith_integrated_dict = self.zenith_integrated()    
