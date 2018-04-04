@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 ################## INFO  #############################
-#  This class 
+#  This class has the functionality of the basic version as well as additional functions 
 #
 #  1) takes input of three files, for example energylist_file = "egrid_list.txt", coszenlist_file="cos_zenith_list.txt", fluxfile2D="numu_from_kaions_flux_table.txt"
 #
