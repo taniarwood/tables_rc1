@@ -149,7 +149,7 @@ class MCEqFluxSpline(object):
 	'''
         correction factor fuction added : cor_factor = new total flux /origial total flux"
         '''
-	return (self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy)) ) /( self.zenith_integrated_dict['numu_k_zenI'](energy) +  (self.zenith_integrated_dict['numu_p_zenI'](energy)) )
+	return  ( self.zenith_integrated_dict['numu_k_zenI'](energy) +  (self.zenith_integrated_dict['numu_p_zenI'](energy)) )/ (self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy)) )
 
 	
 
@@ -194,7 +194,8 @@ class MCEqFluxSpline(object):
         '''
         for each flux, 1) load the data , 2) make the spline 3) eval the spline
         '''
-	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
+	#directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
+	directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/DPMJETIII_h3a_rc1/tables/'
         #total fluxes from all sources for nu/anti nu ratio etc,
 	
 	#global data members
