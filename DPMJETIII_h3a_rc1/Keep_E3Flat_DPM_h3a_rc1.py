@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #
 #  1) takes input of three files, for example energylist_file = "egrid_list.txt", coszenlist_file="cos_zenith_list.txt", fluxfile2D="numu_from_kaions_flux_table.txt"
 #
-#  2) Evalues the spline at a given point. The tables are in units of cos(zenith) egrid (energy in GeV)
+#  2) Evalues the spline at a given point. The tables are in units of cos(zenith) egrid (energy in GeV for all functions, linear!)
 #     the numbers in the tables are the fluxes predicted for a given cos(zeith) and energy. The fluxes are 
 #     listed as flux * E^3. We divide the evaluate spline by energy cubed so that we return to the user the flux
 #      NOT the Flux*E^3
@@ -75,7 +75,7 @@ class MCEqFluxSpline(object):
     #Make the ID splines (one for numu, one for nue) and flat fluxes
 #####################################################################
     def zenith_integrated(self):
-	eedges = np.logspace(-0.5, 3., 301)
+	eedges = np.logspace(-0.5, 3.2, 301)
         ecenters = (eedges[1:] + eedges[:-1])/2.
         ecenters_new = (eedges[1:] + eedges[:-1])/2.
 
@@ -147,11 +147,18 @@ class MCEqFluxSpline(object):
 	
     def correction_factor(self, energy, nu_pi_scale = 1.0):
 	'''
-        correction factor fuction added : cor_factor = new total flux /origial total flux"
+        correction factor fuction added : cor_factor = new total flux /origial total flux
+        energy is in GeV (linear)
         '''
 	return  ( self.zenith_integrated_dict['numu_k_zenI'](energy) +  (self.zenith_integrated_dict['numu_p_zenI'](energy)) )/ (self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy)) )
 
 	
+    def correction_factor_jp(self, energy, nu_pi_scale=1.0):
+        '''
+        Correction factor giving the exact same solution as the one above, but with some algebra to evaluate splines only twice        
+        energy is in GeV (linear)
+        '''
+        return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['numu_k_zenI'](energy)/self.zenith_integrated_dict['numu_p_zenI'](energy) + 1.) + 1.)
 
 
 #  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
@@ -194,8 +201,8 @@ class MCEqFluxSpline(object):
         '''
         for each flux, 1) load the data , 2) make the spline 3) eval the spline
         '''
-	#directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
-	directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/DPMJETIII_h3a_rc1/tables/'
+	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
+	#directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/DPMJETIII_h3a_rc1/tables/'
         #total fluxes from all sources for nu/anti nu ratio etc,
 	
 	#global data members
