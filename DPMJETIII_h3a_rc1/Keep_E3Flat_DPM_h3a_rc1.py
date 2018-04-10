@@ -92,9 +92,9 @@ class MCEqFluxSpline(object):
         sum_nue  = np.zeros_like(ecenters)
         sum_nuebar  = np.zeros_like(ecenters)
 
-    #    bin_width = 2.0/len(zcenters)
+        bin_width = 2.0/len(zcenters)
 	#should use this bin_width but did not in orginal flat fluxes, so for today dont' use them either
-	bin_width = 1.0
+	#bin_width = 1.0
 
         for eii, energyi  in enumerate(ecenters):
                 for zii , czenith  in enumerate(zcenters):
@@ -173,7 +173,6 @@ class MCEqFluxSpline(object):
     
     ########## NU E #################################
     def EvaluateSplineEflat(self, spline_name = None, energy = 0, zenith = -1):
-      #  spline_scaling_factorE = 1.2
 
 	#zenith_integrated_dict = self.zenith_integrated()    #numu_zenI
 
@@ -184,7 +183,6 @@ class MCEqFluxSpline(object):
     
     ######### NU MU #################################
     def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
-     #   spline_scaling_factorMu = 5.7
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
     
     def EvaluateSplineMu(self, spline_name = None, energy = 0, zenith = -1):
@@ -206,8 +204,8 @@ class MCEqFluxSpline(object):
         #total fluxes from all sources for nu/anti nu ratio etc,
 	
 	#global data members
-	self.spline_scaling_factorE = 1.2
-        self.spline_scaling_factorMu = 5.7
+	self.spline_scaling_factorE = 0.020
+        self.spline_scaling_factorMu = 0.100
 
         self.spline_dict = {'nue' :self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "nue_totals.txt"),
                             'antinue':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinue_totals.txt"),
