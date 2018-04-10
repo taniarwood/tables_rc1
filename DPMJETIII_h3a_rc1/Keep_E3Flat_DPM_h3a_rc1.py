@@ -155,7 +155,7 @@ class MCEqFluxSpline(object):
 	
     def correction_factor_jp(self, energy, nu_pi_scale=1.0):
         '''
-        Correction factor giving the exact same solution as the one above, but with some algebra to evaluate splines only twice        
+        Correction factor giving the exact same solution as the one above, but with some algebra to evaluate splines only twice instead of four times as above.       
         energy is in GeV (linear)
         '''
         return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['numu_k_zenI'](energy)/self.zenith_integrated_dict['numu_p_zenI'](energy) + 1.) + 1.)
