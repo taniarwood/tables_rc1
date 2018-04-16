@@ -160,6 +160,14 @@ class MCEqFluxSpline(object):
         '''
         return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['numu_k_zenI'](energy)/self.zenith_integrated_dict['numu_p_zenI'](energy) + 1.) + 1.)
 
+    def correction_factor_jp_e(self, energy, nu_pi_scale=1.0):
+        '''
+        Correction factor giving the exact same solution as the one above, but with some algebra to evaluate splines only twice instead of four times as above.       
+        energy is in GeV (linear)
+        '''
+        return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['nue_k_zenI'](energy)/self.zenith_integrated_dict['nue_p_zenI'](energy) + 1.) + 1.)
+
+
 
 #  NOTE!!!  MCEq_rc1 (release candidate 1) has neutrinos from muons on their own.  This means they are missing from 
 #           my fluxes! Since They come almost entirely from pions at these energies I will add them to the pion template
