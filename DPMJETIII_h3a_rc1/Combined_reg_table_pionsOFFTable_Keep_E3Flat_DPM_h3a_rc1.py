@@ -102,8 +102,8 @@ class MCEqFluxSpline(object):
 
         for eii, energyi  in enumerate(ecenters):
                 for zii , czenith  in enumerate(zcenters):
-                	sum_numu_from_k[eii] +=(self.spline_dict['numu_from_k'].ev(energyi, czenith)/energyi**3)*bin_width 
-                 	sum_numubar_from_k[eii] +=(self.spline_dict['antinum_from_k'].ev(energyi, czenith)/energyi**3)*bin_width 
+                	sum_numu_from_k[eii] +=(self.spline_dict_poff['numu'].ev(energyi, czenith)/energyi**3)*bin_width 
+                 	sum_numubar_from_k[eii] +=(self.spline_dict_poff['antinumu'].ev(energyi, czenith)/energyi**3)*bin_width 
                  	
 			sum_numu_all[eii] +=(self.spline_dict['numu'].ev(energyi, czenith)/energyi**3)*bin_width 
                         sum_numubar_all[eii] +=(self.spline_dict['antinumu'].ev(energyi, czenith)/energyi**3)*bin_width 
@@ -111,18 +111,24 @@ class MCEqFluxSpline(object):
 			sum_nue[eii]  +=(self.spline_dict['nue'].ev(energyi, czenith)/energyi**3)*bin_width 
                         sum_nuebar[eii] +=(self.spline_dict['antinue'].ev(energyi, czenith)/energyi**3)*bin_width 
 
-  #                      sum_nue_from_k[eii]  +=(self.spline_dict['nue_from_k'].ev(energyi, czenith)/energyi**3)*bin_width
-  #                      sum_nuebar_from_k[eii] +=(self.spline_dict['antinue_from_k'].ev(energyi, czenith)/energyi**3)*bin_width
+                        sum_nue_from_k[eii]  +=(self.spline_dict_poff['nue'].ev(energyi, czenith)/energyi**3)*bin_width
+                        sum_nuebar_from_k[eii] +=(self.spline_dict_poff['antinue'].ev(energyi, czenith)/energyi**3)*bin_width
 
-
-	#all the numu iterations
+	#all the iterations
+	#NUMU
+	   #from pions = (totals_numu regualar table) - (totals_numu pions off table)
 	numu_p_tot_use_y =  ((sum_numu_all + sum_numubar_all) - (sum_numu_from_k + sum_numubar_from_k))  * ecenters**3
+	   #from kaons = (totals_numu pions off table)
 	numu_k_tot_use_y = (sum_numubar_from_k + sum_numu_from_k) * ecenters**3
+	   #totals regular table
         numu_tot_use_y =  (sum_numu_all + sum_numubar_all)  * ecenters**3
-	# for the single nue one
-#	nue_tot_use_y = (sum_nue + sum_nuebar)  * ecenters**3
-#       nue_p_tot_use_y =  ((sum_nue + sum_nuebar) - (sum_nue_from_k + sum_nuebar_from_k))  * ecenters**3
-#      nue_k_tot_use_y = (sum_nuebar_from_k + sum_nue_from_k) * ecenters**3
+	#NUE
+	  #totals regular table Nue
+	nue_tot_use_y = (sum_nue + sum_nuebar)  * ecenters**3
+          #from pions = (totals_nue regualar table) - (totals_nue pions off table)
+	nue_p_tot_use_y =  ((sum_nue + sum_nuebar) - (sum_nue_from_k + sum_nuebar_from_k))  * ecenters**3
+	   #from kaons = (totals_numu pions off table)
+        nue_k_tot_use_y = (sum_nuebar_from_k + sum_nue_from_k) * ecenters**3
 
 
 	#make the zenith integrated splines to pass to the dictionary
@@ -131,8 +137,8 @@ class MCEqFluxSpline(object):
         numu_k_zenI = interp1d(ecenters, numu_k_tot_use_y, kind='cubic' )
         numu_p_zenI = interp1d(ecenters, numu_p_tot_use_y, kind='cubic' )
 
-   #     nue_k_zenI = interp1d(ecenters, nue_k_tot_use_y, kind='cubic' )
-   #    nue_p_zenI = interp1d(ecenters, nue_p_tot_use_y, kind='cubic' )
+        nue_k_zenI = interp1d(ecenters, nue_k_tot_use_y, kind='cubic' )
+        nue_p_zenI = interp1d(ecenters, nue_p_tot_use_y, kind='cubic' )
 
 	####################################
 	# Dictionary of splines to return
@@ -177,12 +183,12 @@ class MCEqFluxSpline(object):
         '''
         return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['numu_k_zenI'](energy)/self.zenith_integrated_dict['numu_p_zenI'](energy) + 1.) + 1.)
 
- #   def correction_factor_jp_e(self, energy, nu_pi_scale=1.0):
- #       '''
+    def correction_factor_jp_e(self, energy, nu_pi_scale=1.0):
+        '''
  #       Correction factor giving the exact same solution as the one above, but with some algebra to evaluate splines only twice instead of four times as above.       
  #       energy is in GeV (linear)
  #       '''
- #       return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['nue_k_zenI'](energy)/self.zenith_integrated_dict['nue_p_zenI'](energy) + 1.) + 1.)
+        return 1./((nu_pi_scale-1.)/(self.zenith_integrated_dict['nue_k_zenI'](energy)/self.zenith_integrated_dict['nue_p_zenI'](energy) + 1.) + 1.)
 
 
 
@@ -240,11 +246,11 @@ class MCEqFluxSpline(object):
                             'antinumu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_totals.txt"),
                             'numu_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_kaon.txt"),
                             'antinum_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_kaon.txt")}
-                            #'nue_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion.txt"),
-                           # 'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
+                            'nue_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion.txt"),
+                            'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
 
 
-	self.spline_dict_pions_off = {'nue' :self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "nue_totals_pions_off.txt"),
+	self.spline_dict_poff = {'nue' :self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "nue_totals_pions_off.txt"),
                             'antinue':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinue_totals_pions_off.txt"),
                             'numu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_totals_pions_off.txt"),
                             'antinumu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_totals_pions_off.txt"),
