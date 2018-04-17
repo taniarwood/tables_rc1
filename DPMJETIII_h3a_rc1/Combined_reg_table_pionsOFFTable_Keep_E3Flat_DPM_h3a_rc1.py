@@ -207,20 +207,28 @@ class MCEqFluxSpline(object):
     
     ########## NU E #################################
     def EvaluateSplineEflat(self, spline_name = None, energy = 0, zenith = -1):
-
-	#zenith_integrated_dict = self.zenith_integrated()    #numu_zenI
-
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorE/(self.zenith_integrated_dict['nue_zenI'](energy))    )
-
     def EvaluateSplineE(self, spline_name = None, energy = 0, zenith = -1):
-        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
+        return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3))
+
+    def EvaluateSplineEflat_poff(self, spline_name = None, energy = 0, zenith = -1):
+        return (  (self.spline_dict_poff[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorE/(self.zenith_integrated_dict['nue_zenI'](energy))    )
+    def EvaluateSplineE_poff(self, spline_name = None, energy = 0, zenith = -1):
+        return (  (self.spline_dict_poff[spline_name].ev(energy, zenith)/energy**3))
+
+ 
     
     ######### NU MU #################################
     def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
-       #dont' really need the function below. the regular 'EvaluateSpline' will be just fine here
     def EvaluateSplineMu(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
+    
+    def EvaluateSplineMuflat_poff(self, spline_name = None, energy = 0, zenith = -1):
+        return (  (self.spline_dict_poff[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
+    def EvaluateSplineMu_poff(self, spline_name = None, energy = 0, zenith = -1):
+        return (  (self.spline_dict_poff[spline_name].ev(energy, zenith)/energy**3))
+
 
 #this looks like an issue here, but it is not. It does not matter to the fitter if we are in flux*E^3 space or not appartenly 
 #(we are reduning Flux  the spline (to make flat) is caluclated in Flux*E*3 space .. yikes  maybe switch to doing this in Flux, not flux cubed?  but
@@ -248,9 +256,9 @@ class MCEqFluxSpline(object):
                             'numu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_totals.txt"),
                             'antinumu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_totals.txt"),
                             'numu_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_kaon.txt"),
-                            'antinum_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_kaon.txt"),
+                            'antinumu_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_kaon.txt"),
                             'nue_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion.txt"),
-                            'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
+                            'antinumu_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
 
 
 	self.spline_dict_poff = {'nue' :self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "nue_totals_pions_off.txt"),
@@ -258,9 +266,9 @@ class MCEqFluxSpline(object):
                             'numu':self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "numu_totals_pions_off.txt"),
                             'antinumu':self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_totals_pions_off.txt"),
                             'numu_from_k': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "numu_from_kaon_pions_off.txt"),
-                            'antinum_from_k': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_from_kaon_pions_off.txt"),
+                            'antinumu_from_k': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_from_kaon_pions_off.txt"),
                             'numu_from_pion': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "numu_from_pion_pions_off.txt"),
-                            'antinum_from_pion' : self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_from_pion_pions_off.txt")}
+                            'antinumu_from_pion' : self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_from_pion_pions_off.txt")}
 
         self.zenith_integrated_dict = self.zenith_integrated()
  
