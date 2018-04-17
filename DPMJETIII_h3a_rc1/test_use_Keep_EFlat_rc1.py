@@ -13,6 +13,7 @@ sys.path.append('/home/tables_rc1/DPMJETIII_h3a_rc1')
 #import TaniaFluxSp_DPM_h3a_rc1_options_update2_jaspert
 
 ##### NOW CHANGEING TO this script as this is TOTAL_NUMU instead of pi and k and is mvoing the pi totals to the muons 
+import Combined_reg_table_pionsOFFTable_Keep_E3Flat_DPM_h3a_rc1
 import TaniaFluxSp_DPM_h3a_rc1_options_update2_jasper_gil_sumnumu_totals
 import Keep_E3Flat_DPM_h3a_rc1
 '''    
@@ -23,8 +24,10 @@ parser = argparse.ArgumentParser(description='script for proccessing I3 files')
 filename = args.inflie
 outfilename = args.ofile
 '''
-
-
+flux_c = Combined_reg_table_pionsOFFTable_Keep_E3Flat_DPM_h3a_rc1.MCEqFluxSpline()
+t = flux_c.EvaluateSpline('nue',10, 0.3)
+k = flux_c.EvaluateSplinePionsOff('nue',10, 0.3)
+print t, k
 #flux = TaniaFluxSp.MCEqFluxSpline()
 #flux= TaniaFluxSp_flat2.MCEqFluxSpline()
 #flux = TaniaFluxSp_DPM_h3a_rc1_options_update2_jasper.MCEqFluxSpline()
