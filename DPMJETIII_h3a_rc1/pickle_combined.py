@@ -100,7 +100,8 @@ def redoFile(infile_name, outfile_name):
     print 'Old weights', 
     print 'Stuff', np.sum(data['weight_e']), data['weight_e'].mean(), data['weight_e'].max(), data['weight_e'].min()
     print 'New weights', 
-    print 'Stuff', np.sum(data['weight_DMP_h3a_rc1_flat_e_k']), data['weight_DMP_h3a_rc1_flat_e_k'].mean(), data['weight_DMP_h3a_rc1_flat_e_k'].max(), data['weight_DMP_h3a_rc1_flat_e_k'].min()
+    combined = np.sum(data['weight_DMP_h3a_rc1_flat_e_k']) + np.sum( data['weight_DMP_h3a_rc1_flat_e_p'])
+    print 'Stuff', combined, combined.mean(), combined.max(), combined.min()
 
     bad_apples = data['weight_DMP_h3a_rc1_flat_e_k'] > data['weight_DMP_h3a_rc1_flat_e_k'].mean()
 
