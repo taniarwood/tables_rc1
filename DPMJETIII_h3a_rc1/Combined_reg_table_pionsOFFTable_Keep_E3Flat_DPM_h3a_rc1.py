@@ -163,9 +163,10 @@ class MCEqFluxSpline(object):
 ####FOR TESTING
     def evalSplineNue_ZenI(self, energy = 10.0):
  #       spline = self.zenith_integrated_dict['nue_zenI']
-#  can also do as a one line like this:
 	return   self.zenith_integrated_dict['nue_zenI'](energy) 
-#        return spline(energy)      	
+
+    def EvaluateSplineZen(self, spline_name = None, energy = 10.0):
+        return self.zenith_integrated_dict[spline_name](energy)
     
     def adjust_pi_k(self, energy = 10.0, nu_pi_scale=1.0):
         new_numu_flux_total = self.zenith_integrated_dict['numu_k_zenI'](energy) + nu_pi_scale * (self.zenith_integrated_dict['numu_p_zenI'](energy))
@@ -241,10 +242,10 @@ class MCEqFluxSpline(object):
         '''
         for each flux, 1) load the data , 2) make the spline 3) eval the spline
         '''
-	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
-        directory_p = '/home/trwood/tables_rc1/h3a_DPMJETII_rc1_PionsOff/'
-     #   directory_p = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/h3a_DPMJETII_rc1_PionsOff/'
-	#directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/DPMJETIII_h3a_rc1/tables/'
+#	directory = '/home/trwood/tables_rc1/DPMJETIII_h3a_rc1/tables/'
+ #       directory_p = '/home/trwood/tables_rc1/h3a_DPMJETII_rc1_PionsOff/'
+        directory_p = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/h3a_DPMJETII_rc1_PionsOff/'
+	directory = '/Users/trwood/Downloads/downloaded_notebokos/tables_rc1/DPMJETIII_h3a_rc1/tables/'
         #total fluxes from all sources for nu/anti nu ratio etc,
 	
 	#global data members
