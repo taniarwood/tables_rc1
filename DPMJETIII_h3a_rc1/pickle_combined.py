@@ -24,17 +24,16 @@ parser = argparse.ArgumentParser(description='script for proccessing I3 files')
 filename = args.inflie
 outfilename = args.ofile
 '''
-flux_c = Combined_reg_table_pionsOFFTable_Keep_E3Flat_DPM_h3a_rc1.MCEqFluxSpline()
-t = flux_c.EvaluateSpline('nue',10, 0.3)
-k = flux_c.EvaluateSplinePionsOff('nue',10, 0.3)
+flux= Combined_reg_table_pionsOFFTable_Keep_E3Flat_DPM_h3a_rc1.MCEqFluxSpline()
+t = flux.EvaluateSpline('nue',10, 0.3)
+k = flux.EvaluateSplinePionsOff('nue',10, 0.3)
 print t, k
 print 'try an eval new code'
-test_flat =  flux_c.EvaluateSplineEflat('nue',10, 0.3)
+test_flat =  flux.EvaluateSplineEflat('nue',10, 0.3)
 print 'try an eval new code on zeith integrated'
-test_zenithinteg =  flux_c.evalSplineNue_ZenI( 10.)
+test_zenithinteg =  flux.evalSplineNue_ZenI( 10.)
 print test_zenithinteg, 'new dict of zenith inegrated splines'
-#test_mu = flux.EvaluateSplineMuflat('numu', 10, 0.3)
-test_e = flux_c.EvaluateSplineEflat('nue', 10, 0.3)
+test_e = flux.EvaluateSplineEflat('nue', 10, 0.3)
 #print test
 #quit() 
 def redoFile(infile_name, outfile_name):
@@ -55,14 +54,14 @@ def redoFile(infile_name, outfile_name):
     data['weight_DMP_h3a_rc1_flat_e_k'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  flux.EvaluateSplineEflat_poff('nue',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor
     data['weight_DMP_h3a_rc1_flat_e_k'][~nubool*ebool] = data['weight_noflux'][~nubool*ebool]*  flux.EvaluateSplineEflat_poff('antinue',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor
 
-    data['weight_DMP_h3a_rc1_flat_e_p'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  (flux.EvaluateSplineEflat('nue_',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor - flux.EvaluateSplineEflat_poff('nue',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor)
+    data['weight_DMP_h3a_rc1_flat_e_p'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  (flux.EvaluateSplineEflat('nue',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor - flux.EvaluateSplineEflat_poff('nue',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor)
     data['weight_DMP_h3a_rc1_flat_e_p'][~nubool*ebool] = data['weight_noflux'][~nubool*ebool]*  (flux.EvaluateSplineEflat('antinue',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor - flux.EvaluateSplineEflat_poff('antinue',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor)
 
-    data['weight_DMP_h3a_rc1_flat_mu_k_jaspert'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  flux.EvaluateSplineMuflat_poff('numu',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor 
-    data['weight_DMP_h3a_rc1_flat_mu_k_jaspert'][~nubool*ebool] = data['weight_noflux'][~nubool*ebool]*  flux.EvaluateSplineMuflat_poff('antinumu',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor
+    data['weight_DMP_h3a_rc1_flat_mu_k'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  flux.EvaluateSplineMuflat_poff('numu',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor 
+    data['weight_DMP_h3a_rc1_flat_mu_k'][~nubool*ebool] = data['weight_noflux'][~nubool*ebool]*  flux.EvaluateSplineMuflat_poff('antinumu',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor
     
-    data['weight_DMP_h3a_rc1_flat_mu_p_jaspert'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  (flux.EvaluateSplineMuflat('numu',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor - flux.EvaluateSplineMuflat_poff('numu',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor)
-    data['weight_DMP_h3a_rc1_flat_mu_p_jaspert'][~nubool*ebool] = data['weight_noflux'][~nubool*ebool]*  (flux.EvaluateSplineMuflat('antinumu',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor - flux.EvaluateSplineMuflat_poff('antinumu',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor)
+    data['weight_DMP_h3a_rc1_flat_mu_p'][nubool*ebool] = data['weight_noflux'][nubool*ebool]*  (flux.EvaluateSplineMuflat('numu',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor - flux.EvaluateSplineMuflat_poff('numu',data['energy'][nubool*ebool], np.cos(data['zenith'][nubool*ebool]))*factor)
+    data['weight_DMP_h3a_rc1_flat_mu_p'][~nubool*ebool] = data['weight_noflux'][~nubool*ebool]*  (flux.EvaluateSplineMuflat('antinumu',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor - flux.EvaluateSplineMuflat_poff('antinumu',data['energy'][~nubool*ebool], np.cos(data['zenith'][~nubool*ebool]))*factor)
 
    
 
@@ -129,9 +128,11 @@ if __name__=='__main__':
 #    out_dir    = '/Users/trwood/MSU_sample_sept2016/oscfit/MSU_tania_repickle_flat'
 
 #    out_dir = '/gs/project/ngw-282-ac/trwood/MSU_contain_removed/flat_tania3_oct11/'
-    pickle_dir = '/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/flat_tania3_jaspert2'
-    out_dir ='/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/flat_tania3_jaspert2344'
- #   out_dir = '/home/trwood/MSU_sample/MSU_sample_sept2016/oscfit/MSU_tania_repickle_flat_fixed'
+    #pickle_dir = '/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/flat_tania3_jaspert2'
+    pickle_dir  ='/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/flat_tania3_jaspert2344'
+    out_dir  ='/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/def2'
+ 
+#   out_dir = '/home/trwood/MSU_sample/MSU_sample_sept2016/oscfit/MSU_tania_repickle_flat_fixed'
     all_files = os.listdir(pickle_dir)
 
     for one_file in all_files:
