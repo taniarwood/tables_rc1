@@ -59,6 +59,10 @@ class MCEqFluxSpline(object):
     def EvaluateSpline(self, spline_name = None, energy = 0, zenith = -1):
         return self.spline_dict[spline_name].ev(energy, zenith)/energy**3
 
+    def EvaluateSplinePionsOff(self, spline_name = None, energy = 0, zenith = -1):
+        return self.spline_dict_poff[spline_name].ev(energy, zenith)/energy**3
+
+
     def Plot2Dflux(self, spline):
         x = np.linspace(0., 4, 100)
         y = np.linspace(-1, 1, 100)
@@ -92,8 +96,8 @@ class MCEqFluxSpline(object):
         sum_nue  = np.zeros_like(ecenters)
         sum_nuebar  = np.zeros_like(ecenters)
 
-#        sum_nue_from_k = np.zeros_like(ecenters)
- #       sum_nuebar_from_k = np.zeros_like(ecenters)
+        sum_nue_from_k = np.zeros_like(ecenters)
+        sum_nuebar_from_k = np.zeros_like(ecenters)
 
 
         bin_width = 2.0/len(zcenters)
@@ -150,7 +154,6 @@ class MCEqFluxSpline(object):
 				'numu_p_zenI':numu_p_zenI,
                                 'nue_k_zenI':nue_k_zenI,
                                 'nue_p_zenI':nue_p_zenI}
-}
         #pckl.dump((nue_,open('splined_zenith_integ_DPMJETIII_h3a_nue.pckl', 'w'))
         return  zen_integrated_dictionary
 
@@ -215,7 +218,7 @@ class MCEqFluxSpline(object):
     ######### NU MU #################################
     def EvaluateSplineMuflat(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3) * self.spline_scaling_factorMu/(self.zenith_integrated_dict['numu_zenI'](energy)))
-    
+       #dont' really need the function below. the regular 'EvaluateSpline' will be just fine here
     def EvaluateSplineMu(self, spline_name = None, energy = 0, zenith = -1):
         return (  (self.spline_dict[spline_name].ev(energy, zenith)/energy**3)) 
 
@@ -245,19 +248,19 @@ class MCEqFluxSpline(object):
                             'numu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_totals.txt"),
                             'antinumu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_totals.txt"),
                             'numu_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_kaon.txt"),
-                            'antinum_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_kaon.txt")}
+                            'antinum_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_kaon.txt"),
                             'nue_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion.txt"),
                             'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion.txt")}
 
 
-	self.spline_dict_poff = {'nue' :self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "nue_totals_pions_off.txt"),
-                            'antinue':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinue_totals_pions_off.txt"),
-                            'numu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_totals_pions_off.txt"),
-                            'antinumu':self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_totals_pions_off.txt"),
-                            'numu_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_kaon_pions_off.txt"),
-                            'antinum_from_k': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_kaon_pions_off.txt"),
-                            'numu_from_pion': self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "numu_from_pion_pions_off.txt"),
-                            'antinum_from_pion' : self.LoadData(directory + "egrid.txt", directory + "cos_zenith_grid.txt", directory + "antinumu_from_pion_pions_off.txt")}
+	self.spline_dict_poff = {'nue' :self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "nue_totals_pions_off.txt"),
+                            'antinue':self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinue_totals_pions_off.txt"),
+                            'numu':self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "numu_totals_pions_off.txt"),
+                            'antinumu':self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_totals_pions_off.txt"),
+                            'numu_from_k': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "numu_from_kaon_pions_off.txt"),
+                            'antinum_from_k': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_from_kaon_pions_off.txt"),
+                            'numu_from_pion': self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "numu_from_pion_pions_off.txt"),
+                            'antinum_from_pion' : self.LoadData(directory_p + "egrid.txt", directory_p + "cos_zenith_grid.txt", directory_p + "antinumu_from_pion_pions_off.txt")}
 
         self.zenith_integrated_dict = self.zenith_integrated()
  
