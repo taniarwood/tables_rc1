@@ -90,14 +90,15 @@ class MCEqFluxSpline(object):
 
         sum_numu_all = np.zeros_like(ecenters)
         sum_numubar_all = np.zeros_like(ecenters)
-        sum_numu_from_k = np.zeros_like(ecenters)
-        sum_numubar_from_k = np.zeros_like(ecenters)
+
+        sum_numu_totals_poff = np.zeros_like(ecenters)
+        sum_numubar_totals_poff = np.zeros_like(ecenters)
 
         sum_nue  = np.zeros_like(ecenters)
         sum_nuebar  = np.zeros_like(ecenters)
 
-        sum_nue_from_k = np.zeros_like(ecenters)
-        sum_nuebar_from_k = np.zeros_like(ecenters)
+        sum_nue_poff = np.zeros_like(ecenters)
+        sum_nuebar_poff = np.zeros_like(ecenters)
 
 
         bin_width = 2.0/len(zcenters)
@@ -106,8 +107,8 @@ class MCEqFluxSpline(object):
 
         for eii, energyi  in enumerate(ecenters):
                 for zii , czenith  in enumerate(zcenters):
-                	sum_numu_from_k[eii] +=(self.spline_dict_poff['numu'].ev(energyi, czenith)/energyi**3)*bin_width 
-                 	sum_numubar_from_k[eii] +=(self.spline_dict_poff['antinumu'].ev(energyi, czenith)/energyi**3)*bin_width 
+                	sum_numu_totals_poff[eii] +=(self.spline_dict_poff['numu'].ev(energyi, czenith)/energyi**3)*bin_width 
+                 	sum_numubar_totals_poff[eii] +=(self.spline_dict_poff['antinumu'].ev(energyi, czenith)/energyi**3)*bin_width 
                  	
 			sum_numu_all[eii] +=(self.spline_dict['numu'].ev(energyi, czenith)/energyi**3)*bin_width 
                         sum_numubar_all[eii] +=(self.spline_dict['antinumu'].ev(energyi, czenith)/energyi**3)*bin_width 
@@ -115,24 +116,26 @@ class MCEqFluxSpline(object):
 			sum_nue[eii]  +=(self.spline_dict['nue'].ev(energyi, czenith)/energyi**3)*bin_width 
                         sum_nuebar[eii] +=(self.spline_dict['antinue'].ev(energyi, czenith)/energyi**3)*bin_width 
 
-                        sum_nue_from_k[eii]  +=(self.spline_dict_poff['nue'].ev(energyi, czenith)/energyi**3)*bin_width
-                        sum_nuebar_from_k[eii] +=(self.spline_dict_poff['antinue'].ev(energyi, czenith)/energyi**3)*bin_width
+                        sum_nue_poff[eii]  +=(self.spline_dict_poff['nue'].ev(energyi, czenith)/energyi**3)*bin_width
+                        sum_nuebar_poff[eii] +=(self.spline_dict_poff['antinue'].ev(energyi, czenith)/energyi**3)*bin_width
 
 	#all the iterations
 	#NUMU
 	   #from pions = (totals_numu regualar table) - (totals_numu pions off table)
-	numu_p_tot_use_y =  ((sum_numu_all + sum_numubar_all) - (sum_numu_from_k + sum_numubar_from_k))  * ecenters**3
+	numu_p_tot_use_y =  (sum_numu_all + sum_numubar_all - sum_numu_totals_poff -  sum_numubar_totals_poff)  * ecenters**3
 	   #from kaons = (totals_numu pions off table)
-	numu_k_tot_use_y = (sum_numubar_from_k + sum_numu_from_k) * ecenters**3
+	numu_k_tot_use_y = ( sum_numu_totals_poff +  sum_numubar_totals_poff) * ecenters**3
 	   #totals regular table
         numu_tot_use_y =  (sum_numu_all + sum_numubar_all)  * ecenters**3
+
+
 	#NUE
 	  #totals regular table Nue
 	nue_tot_use_y = (sum_nue + sum_nuebar)  * ecenters**3
           #from pions = (totals_nue regualar table) - (totals_nue pions off table)
-	nue_p_tot_use_y =  ((sum_nue + sum_nuebar) - (sum_nue_from_k + sum_nuebar_from_k))  * ecenters**3
+	nue_p_tot_use_y =  ((sum_nue + sum_nuebar) - ( sum_nue_poff + sum_nuebar_poff))  * ecenters**3
 	   #from kaons = (totals_numu pions off table)
-        nue_k_tot_use_y = (sum_nuebar_from_k + sum_nue_from_k) * ecenters**3
+        nue_k_tot_use_y = ( sum_nue_poff + sum_nuebar_poff) * ecenters**3
 
 
 	#make the zenith integrated splines to pass to the dictionary
