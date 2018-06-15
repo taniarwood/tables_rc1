@@ -1,0 +1,57 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 13:34:54 EDT 2018 1526578494
+Job ID:		5805071.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r13-n64
+End PBS Prologue Thu May 17 13:34:54 EDT 2018 1526578494
+----------------------------------------
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/H3a_SIBYLL2.3c.regular/
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/H3a_SIBYLL2.3c/
+3.15620356107e-05 8.99276024834e-06
+try an eval new code
+try an eval new code on zeith integrated
+0.100866674239 new dict of zenith inegrated splines
+Level6.nutau.16612.tania.pckl
+                            
+Old weights NuE Stuff 3.99777153791e-05 4.48991064355e-10 2.4886319214e-08 9.24318887791e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16613.tania.pckl
+                            
+Old weights NuE Stuff 3.98178150633e-05 4.46008054385e-10 2.91402627255e-08 9.23322819628e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16620.tania.pckl
+                            
+Old weights NuE Stuff 3.97037699579e-05 4.4617494643e-10 2.26279386119e-08 9.25248955238e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16621.tania.pckl
+                            
+Old weights NuE Stuff 3.95351519629e-05 4.46815758718e-10 3.46488967823e-08 9.23322819628e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16622.tania.pckl
+                            
+Old weights NuE Stuff 3.97447884024e-05 4.48328709235e-10 3.46488967823e-08 9.2339743354e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16623.tania.pckl
+----------------------------------------
+Begin PBS Epilogue Thu May 17 13:35:02 EDT 2018 1526578502
+Job ID:		5805071.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	H3a.SIBYLL2.3c.submit.sh
+Session:	13292
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:05,energy_used=0,mem=186848kb,vmem=833728kb,walltime=00:00:08
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r13-n64
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 13:35:06 EDT 2018 1526578506
+----------------------------------------

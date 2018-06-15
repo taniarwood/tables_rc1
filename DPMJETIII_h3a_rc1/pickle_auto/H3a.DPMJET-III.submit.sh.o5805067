@@ -1,0 +1,38 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 13:37:12 EDT 2018 1526578632
+Job ID:		5805067.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r12-n67
+End PBS Prologue Thu May 17 13:37:21 EDT 2018 1526578641
+----------------------------------------
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/H3a_DPMJET-III.regular/
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/H3a_DPMJET-III/
+2.82532585745e-05 8.80253167993e-06
+try an eval new code
+try an eval new code on zeith integrated
+0.0926619645628 new dict of zenith inegrated splines
+Level6.nutau.16612.tania.pckl
+                            
+Old weights NuE Stuff 3.99777153791e-05 4.48991064355e-10 2.4886319214e-08 9.24318887791e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16613.tania.pckl
+----------------------------------------
+Begin PBS Epilogue Thu May 17 13:37:43 EDT 2018 1526578663
+Job ID:		5805067.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	H3a.DPMJET-III.submit.sh
+Session:	31792
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:14
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r12-n67
+Killing leftovers...
+/var/spool/pbs/mom_priv/delquota: line 43: [: 685392*: binary operator expected
+
+End PBS Epilogue Thu May 17 13:37:55 EDT 2018 1526578675
+----------------------------------------

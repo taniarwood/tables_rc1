@@ -1,0 +1,34 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 18:10:17 EDT 2018 1526595017
+Job ID:		5811725.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r13-n27
+End PBS Prologue Thu May 17 18:10:17 EDT 2018 1526595017
+----------------------------------------
+Level6.nue.12600.tania.pckl
+Level6.nue.12600.eflux.pckl
+Level6.nue.12600.muflux.pckl
+Level6.numu.14600.tania.pckl
+Level6.numu.14600.eflux.pckl
+Level6.numu.14600.muflux.pckl
+Level6.nutau.16600.tania.pckl
+Level6.nutau.16600.eflux.pckl
+Level6.nutau.16600.muflux.pckl
+----------------------------------------
+Begin PBS Epilogue Thu May 17 18:10:31 EDT 2018 1526595031
+Job ID:		5811725.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	H3a.EPOS-LHC.submit.sh
+Session:	4226
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=193172kb,vmem=734028kb,walltime=00:00:14
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	0
+Nodes:	sw-2r13-n27
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 18:10:32 EDT 2018 1526595032
+----------------------------------------

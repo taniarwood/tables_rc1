@@ -1,0 +1,25 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 17:07:59 EDT 2018 1526591279
+Job ID:		5809617.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r12-n62
+End PBS Prologue Thu May 17 17:08:08 EDT 2018 1526591288
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Thu May 17 17:08:42 EDT 2018 1526591322
+Job ID:		5809617.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	GH.EPOS-LHC.submit.sh
+Session:	22306
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=30724kb,vmem=225964kb,walltime=00:00:26
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r12-n62
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 17:08:52 EDT 2018 1526591332
+----------------------------------------

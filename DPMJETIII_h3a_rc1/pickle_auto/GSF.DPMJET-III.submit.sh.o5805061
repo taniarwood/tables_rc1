@@ -1,0 +1,32 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 13:35:15 EDT 2018 1526578515
+Job ID:		5805061.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r12-n62
+End PBS Prologue Thu May 17 13:35:15 EDT 2018 1526578515
+----------------------------------------
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/GSF_DPMJET-III.regular/
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/GSF_DPMJET-III/
+3.28329471323e-05 1.01112061012e-05
+try an eval new code
+try an eval new code on zeith integrated
+0.106088031709 new dict of zenith inegrated splines
+Level6.nutau.16612.tania.pckl
+----------------------------------------
+Begin PBS Epilogue Thu May 17 13:35:36 EDT 2018 1526578536
+Job ID:		5805061.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	GSF.DPMJET-III.submit.sh
+Session:	13535
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:04,energy_used=0,mem=58560kb,vmem=705592kb,walltime=00:00:21
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r12-n62
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 13:35:37 EDT 2018 1526578537
+----------------------------------------

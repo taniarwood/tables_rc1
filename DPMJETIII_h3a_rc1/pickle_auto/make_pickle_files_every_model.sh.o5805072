@@ -1,0 +1,67 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 13:34:55 EDT 2018 1526578495
+Job ID:		5805072.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r13-n64
+End PBS Prologue Thu May 17 13:34:55 EDT 2018 1526578495
+----------------------------------------
+DPMJET-III
+GSF
+GSF
+H3a
+H3a
+GH
+GH
+EPOS-LHC
+GSF
+GSF
+H3a
+H3a
+GH
+GH
+DPMJET-III-2017.1
+GSF
+GSF
+H3a
+H3a
+GH
+GH
+qgsjet-II-04
+GSF
+GSF
+H3a
+H3a
+GH
+GH
+SIBYLL2.3c
+GSF
+GSF
+H3a
+H3a
+GH
+GH
+SIBYLL2.1
+GSF
+GSF
+H3a
+H3a
+GH
+GH
+----------------------------------------
+Begin PBS Epilogue Thu May 17 13:34:55 EDT 2018 1526578495
+Job ID:		5805072.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	make_pickle_files_every_model.sh
+Session:	13447
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:00
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	0
+Nodes:	sw-2r13-n64
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 13:34:56 EDT 2018 1526578496
+----------------------------------------

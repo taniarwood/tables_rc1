@@ -1,0 +1,25 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 17:08:17 EDT 2018 1526591297
+Job ID:		5809619.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r12-n62
+End PBS Prologue Thu May 17 17:08:37 EDT 2018 1526591317
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Thu May 17 17:08:58 EDT 2018 1526591338
+Job ID:		5809619.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	GH.SIBYLL2.1.submit.sh
+Session:	22800
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=31236kb,vmem=226476kb,walltime=00:00:16
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r12-n62
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 17:09:07 EDT 2018 1526591347
+----------------------------------------

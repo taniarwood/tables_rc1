@@ -1,0 +1,83 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 13:34:54 EDT 2018 1526578494
+Job ID:		5805070.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r13-n64
+End PBS Prologue Thu May 17 13:34:54 EDT 2018 1526578494
+----------------------------------------
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/H3a_SIBYLL2.1.regular/
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/H3a_SIBYLL2.1/
+3.2422385859e-05 1.00281445767e-05
+try an eval new code
+try an eval new code on zeith integrated
+0.0998886536769 new dict of zenith inegrated splines
+Level6.nutau.16612.tania.pckl
+                            
+Old weights NuE Stuff 3.99777153791e-05 4.48991064355e-10 2.4886319214e-08 9.24318887791e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16613.tania.pckl
+                            
+Old weights NuE Stuff 3.98178150633e-05 4.46008054385e-10 2.91402627255e-08 9.23322819628e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16620.tania.pckl
+                            
+Old weights NuE Stuff 3.97037699579e-05 4.4617494643e-10 2.26279386119e-08 9.25248955238e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16621.tania.pckl
+                            
+Old weights NuE Stuff 3.95351519629e-05 4.46815758718e-10 3.46488967823e-08 9.23322819628e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16622.tania.pckl
+                            
+Old weights NuE Stuff 3.97447884024e-05 4.48328709235e-10 3.46488967823e-08 9.2339743354e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16623.tania.pckl
+                            
+Old weights NuE Stuff 3.97586860445e-05 4.4605522073e-10 2.91402627255e-08 9.27125983714e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16624.tania.pckl
+                            
+Old weights NuE Stuff 3.95896673811e-05 4.4565895244e-10 2.11044558357e-08 9.25602276509e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16900.tania.pckl
+                            
+Old weights NuE Stuff 3.99406774357e-05 4.52708696254e-10 2.96341654835e-08 9.39263916734e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12544.tania.pckl
+                            
+Old weights NuE Stuff 0.000148457161481 1.15871717177e-09 4.58631478779e-09 2.98612993192e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12545.tania.pckl
+                            
+Old weights NuE Stuff 0.00014372580626 1.10397811075e-09 4.39649357887e-09 2.82050858393e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12548.tania.pckl
+----------------------------------------
+Begin PBS Epilogue Thu May 17 13:35:05 EDT 2018 1526578505
+Job ID:		5805070.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	H3a.SIBYLL2.1.submit.sh
+Session:	13221
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:07,energy_used=0,mem=229260kb,vmem=874084kb,walltime=00:00:11
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r13-n64
+Killing leftovers...
+/var/spool/pbs/mom_priv/delquota: line 43: [: 0*: binary operator expected
+
+End PBS Epilogue Thu May 17 13:35:09 EDT 2018 1526578509
+----------------------------------------

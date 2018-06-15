@@ -1,0 +1,117 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 13:34:12 EDT 2018 1526578452
+Job ID:		5805052.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r12-n61
+End PBS Prologue Thu May 17 13:34:25 EDT 2018 1526578465
+----------------------------------------
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/GH_DPMJET-III-2017.1.regular/
+/home/trwood/tables_rc1/model_tests/tables_rc1_albrecht/GH_DPMJET-III-2017.1/
+4.74281974527e-05 2.00520455381e-05
+try an eval new code
+try an eval new code on zeith integrated
+0.149175057666 new dict of zenith inegrated splines
+Level6.nutau.16612.tania.pckl
+                            
+Old weights NuE Stuff 3.99777153791e-05 4.48991064355e-10 2.4886319214e-08 9.24318887791e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16613.tania.pckl
+                            
+Old weights NuE Stuff 3.98178150633e-05 4.46008054385e-10 2.91402627255e-08 9.23322819628e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16620.tania.pckl
+                            
+Old weights NuE Stuff 3.97037699579e-05 4.4617494643e-10 2.26279386119e-08 9.25248955238e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16621.tania.pckl
+                            
+Old weights NuE Stuff 3.95351519629e-05 4.46815758718e-10 3.46488967823e-08 9.23322819628e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16622.tania.pckl
+                            
+Old weights NuE Stuff 3.97447884024e-05 4.48328709235e-10 3.46488967823e-08 9.2339743354e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16623.tania.pckl
+                            
+Old weights NuE Stuff 3.97586860445e-05 4.4605522073e-10 2.91402627255e-08 9.27125983714e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16624.tania.pckl
+                            
+Old weights NuE Stuff 3.95896673811e-05 4.4565895244e-10 2.11044558357e-08 9.25602276509e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nutau.16900.tania.pckl
+                            
+Old weights NuE Stuff 3.99406774357e-05 4.52708696254e-10 2.96341654835e-08 9.39263916734e-11
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12544.tania.pckl
+                            
+Old weights NuE Stuff 0.000148457161481 1.15871717177e-09 4.58631478779e-09 2.98612993192e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12545.tania.pckl
+                            
+Old weights NuE Stuff 0.00014372580626 1.10397811075e-09 4.39649357887e-09 2.82050858393e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12548.tania.pckl
+                            
+Old weights NuE Stuff 0.000146946007986 1.14139027354e-09 4.53697443818e-09 2.91656800434e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12549.tania.pckl
+                            
+Old weights NuE Stuff 0.000143258338511 1.09095182204e-09 4.33552815875e-09 2.7660298457e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12570.tania.pckl
+                            
+Old weights NuE Stuff 0.00015175227167 8.94829066149e-10 3.56905625813e-09 2.27236662396e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12600.eflux.pckl
+                            
+Old weights NuE Stuff 0.000148730911677 5.67393704181e-10 2.25445153482e-09 1.43833551976e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12600.muflux.pckl
+                            
+Old weights NuE Stuff 0.000148730911677 5.67393704181e-10 2.25445153482e-09 1.43833551976e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12600.tania.pckl
+                            
+Old weights NuE Stuff 0.000148730911677 5.67393704181e-10 2.25445153482e-09 1.43833551976e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12601.tania.pckl
+                            
+Old weights NuE Stuff 0.000127300462054 5.63850210628e-10 2.26040229681e-09 1.43833551976e-10
+New weights NuE                                                             
+Old weights NuMu New weights NuMu                             
+Level6.nue.12603.tania.pckl
+----------------------------------------
+Begin PBS Epilogue Thu May 17 13:35:24 EDT 2018 1526578524
+Job ID:		5805052.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	GH.DPMJET-III-2017.1.submit.sh
+Session:	2177
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:08,energy_used=0,mem=235212kb,vmem=882952kb,walltime=00:00:54
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r12-n61
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 13:35:32 EDT 2018 1526578532
+----------------------------------------

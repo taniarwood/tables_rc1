@@ -1,0 +1,60 @@
+#/bin/bash
+
+
+#use an iter tool to make names of submitfiles
+INDEX=0
+## declare an array variable
+declare -a arr=("DPMJET-III" "EPOS-LHC" "DPMJET-III-2017.1" "qgsjet-II-04" "SIBYLL2.3c" "SIBYLL2.1")
+declare -a arr2=("GSF" "H3a" "GH")
+#declare -a arr2=("(pm.GlobalSplineFit,None)" "(pm.HillasGaisser2012,'H3a')" "(pm.GaisserHonda, None)" )
+### now loop through the above array
+#file_paths = "/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/model_tests_auto/"+pmodelu+"_"+intmodelu+"/"
+
+for i in "${arr[@]}"
+do
+   echo "$i"
+	for p in "${arr2[@]}"
+	do
+	    echo $p
+	    echo "$p"
+	    echo "# Each sample that you will fit needs a file like this">> $p"_"$i"_"user_setting.py
+            echo "########################################################" >> $p"_"$i"_"user_setting.py
+            echo "mc_sets = {'baseline':{'baseline':'600'}," >> $p"_"$i"_"user_setting.py  
+            echo " } " >> $p"_"$i"_"user_setting.py
+            echo "# Declare as True if you have systematic sets. False otherwise" >> $p"_"$i"_"user_setting.py
+            echo "########################################################" >> $p"_"$i"_"user_setting.py
+	    echo 'systematic_mc= True ' >> $p"_"$i"_"user_setting.py
+	    echo "# Directory where your pickle files are located"  >> $p"_"$i"_"user_setting.py
+            echo "########################################################" >> $p"_"$i"_"user_setting.py
+	    echo "data_dir = '/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/data/'" >> $p"_"$i"_"user_setting.py
+            echo "sim_dir='/gs/project/ngw-282-ac/trwood/jasper_home/MSU_contain_removed/flat_tania3_DPM_interm_BAKOct12017_jaspert_BKBK/model_tests_auto/"$p"_"$i"/'" >> $p"_"$i"_"user_setting.py
+            echo "########################################################" >> $p"_"$i"_"user_setting.py		
+            echo "genie_p1 = {'nue':sim_dir+'Level6.nue.12',"  >> $p"_"$i"_"user_setting.py
+            echo "            'numu':sim_dir+'Level6.numu.14',"  >> $p"_"$i"_"user_setting.py
+            echo "            'nutau':sim_dir+'Level6.nutau.16'}"  >> $p"_"$i"_"user_setting.py
+            echo "#genie_p2 = '.09232015.pckl'"  >> $p"_"$i"_"user_setting.py
+            echo "genie_p2 = '.tania.pckl'"  >> $p"_"$i"_"user_setting.py
+            echo "##genie_p2 = '.muflux.pckl'"  >> $p"_"$i"_"user_setting.py
+            echo "### in JP's version this was .nuNu.pckl" >> $p"_"$i"_"user_setting.py
+            echo "nugen_nue  = None ">> $p"_"$i"_"user_setting.py
+            echo "nugen_numu = None ">> $p"_"$i"_"user_setting.py
+            echo "atmmu_data_files = [data_dir + 'Level6.0000.data_bkg1.IC86_2.tania.pckl', ">> $p"_"$i"_"user_setting.py
+            echo "                     data_dir + 'Level6.0000.data_bkg1.IC86_3.tania.pckl',">> $p"_"$i"_"user_setting.py
+            echo "                     data_dir + 'Level6.0000.data_bkg1.IC86_4.tania.pckl']">> $p"_"$i"_"user_setting.py
+
+            echo "atmmu_data_files_aux = [data_dir + 'Level6.0000.data_bkg2.IC86_2.tania.pckl',">> $p"_"$i"_"user_setting.py
+            echo "                         data_dir + 'Level6.0000.data_bkg2.IC86_3.tania.pckl',">> $p"_"$i"_"user_setting.py
+            echo "                         data_dir + 'Level6.0000.data_bkg2.IC86_4.tania.pckl']">> $p"_"$i"_"user_setting.py
+            echo "atmmu_sets = {}">> $p"_"$i"_"user_setting.py
+            echo "pure_noise_files = [ ]">> $p"_"$i"_"user_setting.py
+            echo "data = {}">> $p"_"$i"_"user_setting.py
+
+     #       let INDEX=${INDEX}+1
+	done
+done
+# You can access them using echo "${arr[0]}", "${arr[1]}" also
+#
+#      # or do whatever with individual element of the array
+#      done
+#	echo $num
+##	num=$(printf '%06d' $num)

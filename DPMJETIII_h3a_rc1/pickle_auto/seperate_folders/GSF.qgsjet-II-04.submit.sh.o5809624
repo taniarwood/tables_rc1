@@ -1,0 +1,25 @@
+----------------------------------------
+Begin PBS Prologue Thu May 17 17:07:19 EDT 2018 1526591239
+Job ID:		5809624.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Nodes:		sw-2r12-n67
+End PBS Prologue Thu May 17 17:07:20 EDT 2018 1526591240
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Thu May 17 17:07:20 EDT 2018 1526591240
+Job ID:		5809624.gm-1r16-n04.guillimin.clumeq.ca
+Username:	trwood
+Group:		ngw-282-01
+Job Name:	GSF.qgsjet-II-04.submit.sh
+Session:	31065
+Limits:		neednodes=serial,pmem=2700mb,walltime=03:00:00
+Resources:	cput=00:00:00,energy_used=0,mem=0kb,vmem=0kb,walltime=00:00:01
+Queue:		serial-short
+Account:	ngw-282-aa
+Exit code:	1
+Nodes:	sw-2r12-n67
+Killing leftovers...
+
+End PBS Epilogue Thu May 17 17:07:21 EDT 2018 1526591241
+----------------------------------------
